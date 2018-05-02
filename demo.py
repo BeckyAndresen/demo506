@@ -36,21 +36,23 @@ for feature in layer:
     district_plan.append(District(id=district_number, geometry=district_geometry))
 
 
+# 2010 data from: http://www.publicmapping.org/resources/state-resources/wisconsin/wisconsin-2010-census-statistics
+ideal_population_size = 710873
 for district in district_plan:
     if district.id == "1":
-        district.population = 715327
+        district.population = 728042
     elif district.id == "2":
-        district.population = 757511
+        district.population = 751169
     elif district.id == "3":
-        district.population = 721847
+        district.population = 729957
     elif district.id == "4":
-        district.population = 713297
+        district.population = 669015
     elif district.id == "5":
-        district.population = 722739
+        district.population = 707580
     elif district.id == "6":
-        district.population = 711318
+        district.population = 705102
     elif district.id == "7":
-        district.population = 708541
+        district.population = 689279
     elif district.id == "8":
-        district.population = 728129
+        district.population = 706840
 
