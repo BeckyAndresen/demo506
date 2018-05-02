@@ -1,6 +1,9 @@
 import sys
 import os
+import statistics
 from libdistrict.district import District
+from libdistrict.compactness import polsby_popper, schwartzberg, convex_hull_ratio
+from libdistrict.equal_population import districts_in_range, districts_in_percent_deviation
 from osgeo import gdal, ogr
 
 
@@ -56,3 +59,69 @@ for district in district_plan:
     elif district.id == "8":
         district.population = 706840
 
+
+"""
+Demonstrating libdistrict functions starts here
+"""
+
+convex_hull_scores = []
+schwartzberg_scores = []
+polsby_popper_scores = []
+
+
+print("\nCalculating Scores for 2011 Congressional District Plan")
+
+
+"""
+Convex Hull Ratio for each district and the district plan average
+"""
+print("\n\n")
+for district in district_plan:
+    score = convex_hull_ratio(district)
+    convex_hull_scores.append(score)
+    print("District: {}\tConvex Hull Ratio: {}".format(district.id, score))
+
+print("Average Convex Hull Ratio: {}".format(statistics.mean(convex_hull_scores)))
+
+
+"""
+Schwartzberg for each district and the district plan average
+"""
+print("\n\n")
+for district in district_plan:
+    score = schwartzberg(district)
+    schwartzberg_scores.append(score)
+    print("District: {}\tSchwartzberg: {}".format(district.id, score))
+
+print("Average Schwartzberg: {}".format(statistics.mean(schwartzberg_scores)))
+
+
+"""
+Polsby_Popper for each district and the district plan average
+"""
+print("\n\n")
+for district in district_plan:
+    score = polsby_popper(district)
+    polsby_popper_scores.append(score)
+    print("District: {}\tPolsby-Popper: {}".format(district.id, score))
+
+print("Average Polsby-Popper: {}".format(statistics.mean(polsby_popper_scores)))
+
+
+"""
+Equal population for the district plan
+"""
+print("\n\n")
+print("Districts in 10% deviation: {}".format(districts_in_percent_deviation(district_plan, 10)))
+print("Districts in 5% deviation: {}".format(districts_in_percent_deviation(district_plan, 5)))
+print("Districts in 1% deviation: {}".format(districts_in_percent_deviation(district_plan, 1)))
+
+min_target_1 = 710873 - 41858
+max_target_1 =  710873 + 41858
+range_1 = districts_in_range(district_plan, min_target_1, max_target_1)
+print("{} districts in range {} to {}".format(range_1, min_target_1, max_target_1))
+
+min_target_2 = 710873 - 20000
+max_target_2 =  710873 + 20000
+range_2 = districts_in_range(district_plan, min_target_2, max_target_2)
+print("{} districts in range {} to {}".format(range_2, min_target_2, max_target_2))
