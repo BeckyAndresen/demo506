@@ -116,12 +116,14 @@ print("Districts in 10% deviation: {}".format(districts_in_percent_deviation(dis
 print("Districts in 5% deviation: {}".format(districts_in_percent_deviation(district_plan, 5)))
 print("Districts in 1% deviation: {}".format(districts_in_percent_deviation(district_plan, 1)))
 
-min_target_1 = 710873 - 41858
-max_target_1 =  710873 + 41858
+variation_1 = 41858
+min_target_1 = ideal_population_size - variation_1
+max_target_1 =  ideal_population_size + variation_1
 range_1 = districts_in_range(district_plan, min_target_1, max_target_1)
 print("{} districts in range {} to {}".format(range_1, min_target_1, max_target_1))
 
-min_target_2 = 710873 - 20000
-max_target_2 =  710873 + 20000
+variation_2 = 20000
+min_target_2 = ideal_population_size - variation_2
+max_target_2 =  ideal_population_size + variation_2
 range_2 = districts_in_range(district_plan, min_target_2, max_target_2)
 print("{} districts in range {} to {}".format(range_2, min_target_2, max_target_2))
